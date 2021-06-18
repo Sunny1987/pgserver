@@ -20,7 +20,7 @@ func main() {
 		log.Fatal("$PORT must be set")
 	}
 
-	l := log.New(os.Stdout, "WAT:", log.LstdFlags)
+	l := log.New(os.Stdout, "PGServ:", log.LstdFlags)
 	parseHandler := handlers.GetNewLogger(l)
 	serverMux := mux.NewRouter()
 

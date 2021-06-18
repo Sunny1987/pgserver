@@ -16,8 +16,8 @@ func createConnection() *sql.DB {
 	}
 
 	// Open the connection
-	//db, err := sql.Open("postgres", os.Getenv("POSTGRES_URL"))
-	db, err := sql.Open("postgres", "user=user password=pass dbname=postgres sslmode=disable")
+	db, err := sql.Open("postgres", "postgres://idcyllburgvvbd:889cc4417bffce17643aa4619773cbccaa6efe0610882eb41da60581fd56241c@ec2-52-4-111-46.compute-1.amazonaws.com:5432/ddgju1afa6tggc")
+	//db, err := sql.Open("postgres", "user=user password=pass dbname=postgres sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
