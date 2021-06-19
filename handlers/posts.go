@@ -23,7 +23,7 @@ func (n *NewLogger) AddScan(rw http.ResponseWriter, r *http.Request) {
 	var scan models.Scan
 	scan.Url = result.Request.URL
 	scan.Person = result.Person
-	scan.Result = string(d)
+	scan.Result = d
 
 	insertId := middleware.InsertScan(scan)
 
