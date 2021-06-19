@@ -130,7 +130,7 @@ func InsertUser(scan models.Scan) int64 {
 
 	// create the insert sql query
 	// returning userid will return the id of the inserted user
-	sqlStatement := `INSERT INTO scans (url, person, result) VALUES ($1, $2, $3) RETURNING userid`
+	sqlStatement := `INSERT INTO scans (url, person, result) VALUES ($1, $2, $3) RETURNING scan_id`
 	//sqlStatement := fmt.Sprintf("INSERT INTO scans (url, person, result) VALUES ($1,$2,&3) RETURNING userid",)
 
 	// the inserted id will store in this id
