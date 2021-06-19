@@ -114,8 +114,8 @@ func GetScans() ([]models.Scan, error) {
 	return scans, err
 }
 
-// InsertUser inserts one user in the DB
-func InsertUser(scan models.Scan) int64 {
+// InsertScan inserts one user in the DB
+func InsertScan(scan models.Scan) int64 {
 
 	// create the postgres db connection
 	db := createConnection()
@@ -148,4 +148,32 @@ func InsertUser(scan models.Scan) int64 {
 
 	// return the inserted id
 	return id
+}
+
+func DeleteScan(id int64) int64 {
+
+	// create the postgres db connection
+	db := createConnection()
+
+	// close the db connection
+	defer db.Close()
+
+	// create the delete sql query
+	sqlStatement := `DELETE FROM scans WHERE scan_id=$1`
+
+	// execute the sql statement
+	res, err := db.Exec(sqlStatement, id)
+
+	if err != nil {
+		log.Fatalf("Unable to execute the query. %v", err)
+	}
+
+	// check how many rows affected
+	rowsAffected, err := res.RowsAffected()
+
+	if err != nil {
+		log.Fatalf("Error while checking the affected rows. %v", err)
+	}
+
+	return rowsAffected
 }

@@ -25,7 +25,7 @@ func (n *NewLogger) AddScan(rw http.ResponseWriter, r *http.Request) {
 	scan.Person = result.Person
 	scan.Result = string(d)
 
-	insertId := middleware.InsertUser(scan)
+	insertId := middleware.InsertScan(scan)
 
 	res := models.Response{
 		ID:      insertId,

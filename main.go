@@ -30,7 +30,8 @@ func main() {
 	getRouter.HandleFunc("/scans", parseHandler.GetScans)
 	postRouter := serverMux.Methods("POST").Subrouter()
 	postRouter.HandleFunc("/addscan", parseHandler.AddScan)
-
+	deleteRouter := serverMux.Methods("DELETE").Subrouter()
+	deleteRouter.HandleFunc("/deletescan/{id}", parseHandler.DeleteAScan)
 	//CORS
 	ch := goHandlers.CORS(goHandlers.AllowedOrigins([]string{"*"}))
 
