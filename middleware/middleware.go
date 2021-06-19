@@ -75,3 +75,77 @@ func GetUsers() ([]models.User, error) {
 	return users, err
 
 }
+
+func GetScans() ([]models.Scan, error) {
+	//create the postgres db connection
+	db := createConnection()
+
+	//close the db connection
+	defer db.Close()
+
+	var scans []models.Scan
+
+	//sql query
+	sqlStatement := `select * from scans`
+
+	//execute the sql statement
+	rows, err := db.Query(sqlStatement)
+	if err != nil {
+		log.Fatalf("Unable to execute the query. %v", err)
+	}
+
+	//close the statement
+	defer rows.Close()
+
+	for rows.Next() {
+		var scan models.Scan
+
+		// unmarshal the row object to user
+		err = rows.Scan(&scan.Id, &scan.Person, &scan.Url, &scan.Result)
+
+		if err != nil {
+			log.Fatalf("Unable to scan the row. %v", err)
+		}
+
+		// append the user in the users slice
+		scans = append(scans, scan)
+
+	}
+	return scans, err
+}
+
+// InsertUser inserts one user in the DB
+func InsertUser(scan models.Scan) int64 {
+
+	// create the postgres db connection
+	db := createConnection()
+
+	// close the db connection
+	defer func(db *sql.DB) {
+		err := db.Close()
+		if err != nil {
+
+		}
+	}(db)
+
+	// create the insert sql query
+	// returning userid will return the id of the inserted user
+	sqlStatement := `INSERT INTO scans (url, person, result) VALUES ($1, $2, $3) RETURNING userid`
+	//sqlStatement := fmt.Sprintf("INSERT INTO scans (url, person, result) VALUES ($1,$2,&3) RETURNING userid",)
+
+	// the inserted id will store in this id
+	var id int64
+
+	// execute the sql statement
+	// Scan function will save the insert id in the id
+	err := db.QueryRow(sqlStatement, scan.Url, scan.Person, scan.Result).Scan(&id)
+
+	if err != nil {
+		log.Fatalf("Unable to execute the query. %v", err)
+	}
+
+	fmt.Printf("Inserted a single record %v", id)
+
+	// return the inserted id
+	return id
+}

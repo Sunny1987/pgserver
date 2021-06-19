@@ -27,10 +27,9 @@ func main() {
 	//Register the handlers to the server mux
 	getRouter := serverMux.Methods("GET").Subrouter()
 	getRouter.HandleFunc("/users", parseHandler.GetUsers)
-	//postRouter := serverMux.Methods("POST").Subrouter()
-	//postRouter.HandleFunc("/scan", parseHandler.GetURLResp)
-	//postRouter.HandleFunc("/login", parseHandler.Login)
-	//postRouter.Use(parseHandler.MiddlewareValidation)
+	getRouter.HandleFunc("/scans", parseHandler.GetScans)
+	postRouter := serverMux.Methods("POST").Subrouter()
+	postRouter.HandleFunc("/addscan", parseHandler.AddScan)
 
 	//CORS
 	ch := goHandlers.CORS(goHandlers.AllowedOrigins([]string{"*"}))

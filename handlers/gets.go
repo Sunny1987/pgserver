@@ -25,3 +25,12 @@ func (n *NewLogger) GetUsers(rw http.ResponseWriter, r *http.Request) {
 	}
 	json.NewEncoder(rw).Encode(users)
 }
+
+func (n *NewLogger) GetScans(rw http.ResponseWriter, r *http.Request) {
+	n.l.Println("****Fetching the scans********")
+	scans, err := middleware.GetScans()
+	if err != nil {
+		n.l.Println(err)
+	}
+	json.NewEncoder(rw).Encode(scans)
+}
