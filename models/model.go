@@ -103,11 +103,12 @@ type Result struct {
 		Wc121G166 string `json:"wc_121_g_166"`
 	} `json:"embeds"`
 	Tracks []struct {
-		Track     string `json:"track"`
-		Wc121H96  string `json:"wc_121_h_96"`
-		Wc121ARIA string `json:"wc_121_aria"`
-		Wc111G94  string `json:"wc_111_g_94"`
-		Wc111H2   string `json:"wc_111_h_2s"`
+		Track      string `json:"track"`
+		Wc121H96   string `json:"wc_121_h_96"`
+		Wc121ARIA  string `json:"wc_121_aria"`
+		Wc111G94   string `json:"wc_111_g_94"`
+		Wc111H2    string `json:"wc_111_h_2s"`
+		Wcag122G87 string `json:"wcag_122_g_87"`
 	} `json:"tracks"`
 }
 
