@@ -3,22 +3,27 @@ package middleware
 import (
 	"database/sql"
 	"fmt"
-	"github.com/joho/godotenv"
-	_ "github.com/lib/pq"
+
+	//"github.com/joho/godotenv"
 	"log"
-	"os"
+
+	_ "github.com/lib/pq"
+
+	//"os"
 	"pgserver/models"
 )
 
 func createConnection() *sql.DB {
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatalf("Error loading .env file")
-	}
+	// err := godotenv.Load(".env")
+	// if err != nil {
+	// 	log.Fatalf("Error loading .env file")
+	// }
 
 	// Open the connection
-	db, err := sql.Open("postgres", os.Getenv("POSTGRES_URL"))
-	//db, err := sql.Open("postgres", "user=user password=pass dbname=postgres sslmode=disable")
+	//db, err := sql.Open("postgres", os.Getenv("POSTGRES_URL"))
+	//db, err := sql.Open("postgres", "user=postgres password=postgres dbname= sslmode=disable")
+	//db, err := sql.Open("postgres", "user=postgres password=postgres host=ec2-44-202-11-141.compute-1.amazonaws.com port=5432 dbname=mydb sslmode=require")
+	db, err := sql.Open("postgres", "postgres://user:FhsPJOoJ3oyYnpe32mEXvgHyvVaiOgNu@dpg-cfb3eqg2i3mjdukporg0-a.singapore-postgres.render.com/mydb_gg02")
 	if err != nil {
 		panic(err)
 	}
